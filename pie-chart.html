@@ -1,6 +1,7 @@
 <html>
 <head>
   <script src="resrc/d3.js" charset="utf-8"></script>
+  <script src="resrc/jquery.js" charset="utf-8"></script>
   <link rel="stylesheet" href="resrc/bootstrap/css/bootstrap.min.css">
   <script>
     // The following dataset would be brought in through react API call.
@@ -16,10 +17,12 @@
     svg{
       display: block;
       margin: auto;
+      width: 100%;
     }
     
     body{
       margin : 10 50px;
+      height : 100%;
     }
     
     div{
@@ -39,7 +42,7 @@
     <div class="col-md-4">
       <h4>Random</h4>
       lkajs dlfkja sdlfkja sldfkja sldfkja sdflkasjdf alskdjf alskdjf alskdj lkasjd flkajsd flkasjd flaksjdf laksjdf laksjd flaksjd flasdkfa skd fkskdf sdf laskjdf laksjd flkajsd flkajs dflkajs dflkjas dflkjas ldkfj aslkdfj alskdjf alksdjf alksdjf adsf</div>
-    <div class="col-md-5" ><div id="chart"></div></div>
+    <div class="col-md-5" id="chart-container"><div id="chart"></div></div>
     <div class="col-md-3" >
       <h4>Key</h4>
       asdfasdfalskdfjal skdjf laksjdf laksjd flkasjd f
@@ -48,10 +51,10 @@
   </div>
   <script>
     // Pie Chart
-    var width = 400;
+    var divWidth = document.getElementById("chart-container").offsetWidth*0.9;
+        var width = divWidth < 500 ? divWidth : 500;
     var height = width;
     var radius = Math.min(width, height) / 2;
-    
     var color = d3.scale.category20();
 
     var svg = d3.select('#chart')
@@ -60,7 +63,7 @@
       .attr('height', height)
       .append('g')
       .attr('transform', 'translate(' + (width/2) + ',' + (height / 2) + ')');
-                
+      
     var arc = d3.svg.arc()
       .outerRadius(radius)
       .innerRadius(0);
@@ -77,6 +80,21 @@
       .attr('fill', function(d, i) {
         return color(d.data.label)
       });
+    
+    // Dynamic Chart Sizing
+    function updateWindow(){
+        var divWidth = document.getElementById("chart-container").offsetWidth*0.9;
+        var width = divWidth < 500 ? divWidth : 500;
+        var height = width;
+        var radius = Math.min(width, height) / 2;
+        svg.attr("width", width).attr("height", height).attr('transform', 'translate(' + (width/2) + ',' + (height / 2) + ')');
+        arc.outerRadius(radius);
+        path.attr('d', arc);
+        $('body').css("min-height", width + 200); //better way to find 200
+        $('#body-container').css("height", width);
+        $('svg').css("height", width);
+    }
+    window.onresize = updateWindow;
   </script>
 </body>
 </html>
