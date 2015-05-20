@@ -2,7 +2,7 @@
 <head>
   <script src="resrc/d3.js" charset="utf-8"></script>
   <link rel="stylesheet" href="resrc/bootstrap/css/bootstrap.min.css">
-  <script type="text/javascript">
+  <script>
     // The following dataset would be brought in through react API call.
     var dataset  = [
         { label: 'Mortgage', value: 10 },
@@ -11,15 +11,44 @@
         { label: 'Commute', value: 40 }
       ];
   </script>
+  <style>
+    
+    svg{
+      display: block;
+      margin: auto;
+    }
+    
+    body{
+      margin : 10 50px;
+    }
+    
+    div{
+      padding: 10px 0;
+    }
+    h1{
+      padding: 0 0 0 15px;
+    }
+    
+  </style>
 </head>
 
 <body>
-  <h1>D3.js Pie Chart Demo</h1>
   
-  <div id=chart></div>
-  
-  <script type="text/javascript">
-    var width = 500;
+  <div class="row" >
+    <h1>D3.js Pie Chart Demo</h1>
+    <div class="col-md-4">
+      <h4>Random</h4>
+      lkajs dlfkja sdlfkja sldfkja sldfkja sdflkasjdf alskdjf alskdjf alskdj lkasjd flkajsd flkasjd flaksjdf laksjdf laksjd flaksjd flasdkfa skd fkskdf sdf laskjdf laksjd flkajsd flkajs dflkajs dflkjas dflkjas ldkfj aslkdfj alskdjf alksdjf alksdjf adsf</div>
+    <div class="col-md-5" ><div id="chart"></div></div>
+    <div class="col-md-3" >
+      <h4>Key</h4>
+      asdfasdfalskdfjal skdjf laksjdf laksjd flkasjd f
+      asdf as;dfkjasdlfk jdasf
+    </div>
+  </div>
+  <script>
+    // Pie Chart
+    var width = 400;
     var height = width;
     var radius = Math.min(width, height) / 2;
     
